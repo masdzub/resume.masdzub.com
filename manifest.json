@@ -8,8 +8,8 @@
     "theme_color": "#1a202c",
     "icons": [
       {
-        "src": "/favicon.ico",
-        "sizes": "192x192",
+        "src": "https://www.gravatar.com/avatar/509d3b6019d078eb39f42d51e7024abc?s=200",
+        "sizes": "200x200",
         "type": "image/png"
       }
     ]
