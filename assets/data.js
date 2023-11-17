@@ -20,19 +20,18 @@ new Vue({
           'Webserver',
           'cPanel & WHM'
         ],
-        automationAndScripting: [
+        automation: [
           'Ansible',
           'Bash',
           'Python',
+          'assh'
+        ],
+        extra: [
+          'Word Office',
           'Docker',
           'PHP',
           'NodeJS',
           'NuxtJS'
-        ],
-        extra: [
-          'Photoshop',
-          'Word Office',
-          'Power Point'
         ]
       },
       experiences: [
