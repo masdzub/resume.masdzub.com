@@ -22,52 +22,12 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <!-- Add Vue.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
   <title>Resume</title>
   <link rel="icon"  href="https://www.gravatar.com/avatar/509d3b6019d078eb39f42d51e7024abc?s=50" >
   <link rel="manifest" href="/manifest.json">
-
-  <style>
-    .toggle-button {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 999;
-      cursor: pointer;
-      font-size: 20px;
-    }
-    .dark {
-    background-color: #1a202c;
-    color: white;
-    transition: background-color 1s, color 0.5s; /* Efek transisi */
-    }
-    /* Add styles for the preloader */
-    .preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #ffffff; /* Change this to your desired background color */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .loader {
-      border: 4px solid #f3f3f3; /* Light grey */
-      border-top: 4px solid #3498db; /* Blue */
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
 
   <script>
     if ('serviceWorker' in navigator) {
@@ -87,458 +47,158 @@
     <div class="loader"></div>
   </div>
   <div class="container mx-auto p-4 subpixel-antialiased">
+
     <button class="toggle-button" id="theme-toggle">
       <i class="far fa-moon"></i>
     </button>
+
     <main class="mb-12">
+      <div id="app">
+        <!-- Content -->
         <div class="section mt-2">
-            <div class="flex items-center justify-center">
-              <div class="m-2 text-right">
-                <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">Dzubayyan Ahmad</h1>
-                <h2 class="text-xs uppercase font-bold text-green-500">Senior Technical Support Specialist</h2>
-                <div class="mt-2 text-xs text-gray-500 md:hidden">
-                  <div>hello@masdzub.com</div>
-                  <div class="tabular-nums">+62 881 08 000 81 80</div>
-                  <div><a href="https://masdzub.com" target="_blank" >https://masdzub.com</a></div>
-                </div>
-              </div>
-              <div class="relative flex my-2 mx-4">
-                <!-- Use Gravatar based on the email address -->
-                <!-- src="https://www.gravatar.com/avatar/{{ md5('yanto@hello.com') }}?s=200"  -->
-                <a class="relative z-10" href="https://masdzub.com/">
-                  <img class="w-20 h-20 md:w-16 md:h-16 rounded-full ring-4 ring-green-400 ring-offset-2 dark:ring-offset-gray-900" src="https://www.gravatar.com/avatar/509d3b6019d078eb39f42d51e7024abc?s=300"  target="_blank" alt="Dzubayyan Ahmad - Senior Technical Support Specialist">
-                </a>
-                <div class="absolute inline-flex w-20 h-20 md:w-16 md:h-16 rounded-full ring-8 ring-green-400 animate-ping opacity-20"></div>
-              </div>
-              <div class="ml-2 mb-2 md:mb-0 text-xs text-gray-500 hidden md:block">
-                <div>hello@masdzub.com</div>
-                <div class="tabular-nums">+62 881 08 000 81 80</div>
-                <div><a href="https://masdzub.com" target="_blank" >https://masdzub.com</a></div>
+          <div class="flex items-center justify-center">
+            <div class="m-2 text-right">
+              <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">{{ fullName }}</h1>
+              <h2 class="text-xs uppercase font-bold text-green-500">{{ jobTitle }}</h2>
+              <div class="mt-2 text-xs text-gray-500 md:hidden">
+                <div>{{ email }}</div>
+                <div class="tabular-nums">{{ phoneNumber }}</div>
+                <div><a :href="website" target="_blank">{{ website }}</a></div>
               </div>
             </div>
-            <div class="text-sm text-center italic text-gray-400 mt-2">Technical Support Specialist, Half Sysadmin based in Yogyakarta, Indonesia</div>
+            <div class="relative flex my-2 mx-4">
+              <a class="relative z-10" :href="website" target="_blank">
+                <img class="w-20 h-20 md:w-16 md:h-16 rounded-full ring-4 ring-green-400 ring-offset-2 dark:ring-offset-gray-900" :src="gravatarURL" alt="Profile Image">
+              </a>
+              <div class="absolute inline-flex w-20 h-20 md:w-16 md:h-16 rounded-full ring-8 ring-green-400 animate-ping opacity-20"></div>
+            </div>
+            <div class="ml-2 mb-2 md:mb-0 text-xs text-gray-500 hidden md:block">
+              <div>{{ email }}</div>
+              <div class="tabular-nums">{{ phoneNumber }}</div>
+              <div><a :href="website" target="_blank">{{ website }}</a></div>
+            </div>
           </div>
-          <div class="section">
-            <h2 class="text-2xl font-light mb-4 flex">
+          <div class="text-sm text-center italic text-gray-400 mt-2">{{ description }}</div>
+        </div>
+
+
+        <div class="section">
+          <h2 class="text-2xl font-light mb-4 flex">
+            <span class="mr-2 mt-1 text-gray-400">
               <span class="mr-2 mt-1 text-gray-400">
-                <span class="mr-2 mt-1 text-gray-400">
-                  <i class="fa-solid fa-terminal fa-beat fa-xs"></i>
+                <i class="fa-solid fa-terminal fa-beat fa-xs"></i>
+              </span>
+            </span>
+            <span class="border-b-4 border-green-400 pb-1">Skills</span>
+          </h2>
+          <div class="md:flex justify-between pl-4">
+            <!-- Vue will render skills here -->
+            <div v-for="(skills, category) in skillsData" :key="category" class="md:w-1/3 px-4 mb-4 md:mb-0">
+              <h3 class="text-xs font-semibold uppercase mb-1">{{ category }}</h3>
+              <span v-for="skill in skills" :key="skill" class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">{{ skill }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="text-2xl font-light mb-4 flex">
+            <span class="mr-2 mt-1 text-gray-400">
+              <i class="fa-solid fa-flask fa-beat fa-xs"></i>
+            </span>
+            <span class="border-b-4 border-green-400 pb-1">Experiences</span>
+          </h2>
+          <div class="pl-8">
+            <!-- Experiences will be rendered here -->
+            <div v-for="(experience, index) in experiences" :key="index" class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
+              <div class="tracking-tight flex items-baseline justify-between">
+                <div>
+                  <span class="font-extrabold mr-1">{{ experience.title }}</span>
+                  <small class="text-gray-500 font-medium italic">
+                    <a :href="experience.companyLink" target="_blank">{{ experience.company }}</a>
+                  </small>
+                </div>
+                <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
+                  <span class="block md:inline">{{ experience.startDate }}</span>
+                  <span class="px-1 hidden md:inline">-</span>
+                  <span>{{ experience.endDate === 'Present' ? 'Present' : experience.endDate }}</span>
                 </span>
-              </span>
-              <span class="border-b-4 border-green-400 pb-1">Skills</span>
-            </h2>
-            <div class="md:flex justify-between pl-4">
-              <div class="md:w-1/3 px-4 mb-4 md:mb-0">
-                <h3 class="text-xs font-semibold uppercase mb-1">Basic</h3>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Linux Server</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">CMS Wordpress</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Networking</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Webserver</span>
-            
               </div>
-              <div class="md:w-1/3 px-4 mb-4 md:mb-0">
-                <h3 class="text-xs font-semibold uppercase mb-1">Automation and Scripting</h3>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Ansible</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Ansible</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Bash</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Python</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Docker</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">PHP</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">NodeJS</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">NuxtJS</span>
-            
-              </div>
-              <div class="md:w-1/3 px-4 mb-4 md:mb-0">
-                <h3 class="text-xs font-semibold uppercase mb-1">Extra</h3>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Photoshop</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Word Office</span>
-                <span class="inline-flex mr-2 text-xs font-semibold text-opacity-70 text-black border px-1 rounded border-purple-100 bg-purple-50 dark:border-gray-900 dark:bg-gray-600">Power Point</span>
+              <p class="text-sm mt-1 text-gray-600 dark:text-gray-500 w-3/4">{{ experience.description }}</p>
             </div>
           </div>
-          <div class="section">
-            <h2 class="text-2xl font-light mb-4 flex">
-              <span class="mr-2 mt-1 text-gray-400">
-                <i class="fa-solid fa-flask fa-beat fa-xs"></i>
-              </span>
-              <span class="border-b-4 border-green-400 pb-1"> Experiences</span>
-            </h2>
-            <div class="pl-8">
-              <div class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Sr. Technical Support Specialist</span>
-                    <small class="text-gray-500 font-medium italic">
-                      <a target="_blank" href="https://domainesia.com">@DomaiNesia</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2022/10</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Present</span>
-                  </span>
+        </div>
+
+        <div class="section">
+          <h2 class="text-2xl font-light mb-4 flex">
+            <span class="mr-2 mt-1 text-gray-400">
+              <i class="fa-solid fa-certificate fa-beat fa-xs"></i>
+            </span>
+            <span class="border-b-4 border-green-400 pb-1">Certifications</span>
+          </h2>
+          <div class="pl-8">
+            <!-- Certification items -->
+            <div v-for="(certification, index) in certifications" :key="index" class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
+              <div class="tracking-tight flex items-baseline justify-between">
+                <div>
+                  <span class="font-extrabold mr-1">{{ certification.title }}</span>
+                  <small class="text-gray-500 font-medium italic">
+                    @
+                    <a :href="certification.validationLink" target="_blank" class="underline">Validation Link</a>
+                  </small>
                 </div>
-                <p class="text-sm mt-1 text-gray-600 dark:text-gray-500 w-3/4">Render technical advice, support, and assistance to various organizations and consumers for technical and software problems, also deal with end-users directly and effectively communicate answers in an understandable manner.</p>
+                <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
+                  <span class="block md:inline">{{ certification.startDate }}</span>
+                  <span class="px-1 hidden md:inline">-</span>
+                  <span>{{ certification.endDate === 'Now' ? 'Now' : certification.endDate }}</span>
+                </span>
               </div>
-              <!-- Tambahkan pengalaman lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Technical Support Specialist</span>
-                    <small class="text-gray-500 font-medium italic">
-                      <a target="_blank" href="https://domainesia.com">@DomaiNesia</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2019/03</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>2022/10</span>
-                  </span>
-                </div>
-                <p class="text-sm mt-1 text-gray-600 dark:text-gray-500 w-3/4">Render technical advice, support, and assistance to various organizations and consumers for technical and software problems, also deal with end-users directly and effectively communicate answers in an understandable manner.</p>
-              </div>
-              <!-- Tambahkan pengalaman lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">System Administrator</span>
-                    <small class="text-gray-500 font-medium italic">
-                      <a target="_blank" href="#">@Manage Server Indonesia</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2020/04</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>2021/02</span>
-                  </span>
-                </div>
-                <p class="text-sm mt-1 text-gray-600 dark:text-gray-500 w-3/4">Manage and maintenance server infrastructure and our server client.</p>
-              </div>
-              <!-- Tambahkan pengalaman lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Linux System Administrator</span>
-                    <small class="text-gray-500 font-medium italic">
-                      <a target="_blank" href="#">@Teras Code Digital</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2018/07</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>2019/06</span>
-                  </span>
-                </div>
-                <p class="text-sm mt-1 text-gray-600 dark:text-gray-500 w-3/4">Managed daily activities to include user support and system administration task, Managed the day to day IT troubleshooting for users both locally and remotely.</p>
-              </div>
-              <!-- Tambahkan pengalaman lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Training Development Staff</span>
-                    <small class="text-gray-500 font-medium italic">
-                      <a target="_blank" href="#">@Teras Code Digital</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2018/04</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>2019/06</span>
-                  </span>
-                </div>
-                <p class="text-sm mt-1 text-gray-600 dark:text-gray-500 w-3/4">Identify training and development needs within an organisation through job analysis, appraisal schemes and regular consultation with business managers and human resources departments.</p>
-              </div>
-              <!-- Tambahkan pengalaman lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Assistant Lecture</span>
-                    <small class="text-gray-500 font-medium italic">
-                      <a target="_blank" href="#">@Amikom University of Yogyakarta</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2017/09</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>2018/07</span>
-                  </span>
-                </div>
-                <p class="text-sm mt-1 text-gray-600 dark:text-gray-500 w-3/4">Supervise the work of students, provide advice on study skills and help them with learning pro, Teach as a member of a teaching team within an established programme of study.</p>
-              </div>
-              <!-- Tambahkan pengalaman lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Photographer</span>
-                    <small class="text-gray-500 font-medium italic">
-                      <a target="_blank" href="#">@Albatros Photography</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2016/04</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>2016/09</span>
-                  </span>
-                </div>
-                <p class="text-sm mt-1 text-gray-600 dark:text-gray-500 w-3/4">Take photos of clients or objects in studio environments.</p>
-              </div>
-              <!-- Tambahkan pengalaman lain di sini sesuai kebutuhan -->
             </div>
           </div>
-          
-          <div class="section">
-            <h2 class="text-2xl font-light mb-4 flex">
-              <span class="mr-2 mt-1 text-gray-400">
-                <i class="fa-solid fa-certificate fa-beat fa-xs"></i>
-              </span>
-              <span class="border-b-4 border-green-400 pb-1">Certification</span>
-            </h2>
-            <div class="pl-8">
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">cPanel Professional Certification (CPP)</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/290f-0d9e-c6ab-4dad" target="_blank"  class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2020</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
+        </div>
 
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">cPanel & WHM Sales Professional (CPSP)</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/c886-aa62-89f1-53e1"  target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2021</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
+        <div class="section">
+          <h2 class="text-2xl font-light mb-4 flex">
+            <span class="mr-2 mt-1 text-gray-400">
+              <i class="fa-solid fa-graduation-cap fa-beat fa-xs"></i>
+            </span>
+            <span class="border-b-4 border-green-400 pb-1">Education</span>
+          </h2>
+          <div class="pl-8">
+            <!-- Education items -->
+            <div v-for="(education, index) in educations" :key="index" class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
+              <div class="tracking-tight flex items-baseline justify-between">
+                <div>
+                  <span class="font-extrabold mr-1">{{ education.field }}</span>
+                  <small class="text-gray-500 font-medium italic">@ {{ education.institution }}</small>
                 </div>
+                <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
+                  <span class="block md:inline">{{ education.startDate }}</span>
+                  <span class="px-1 hidden md:inline">-</span>
+                  <span>{{ education.endDate }}</span>
+                </span>
               </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-              
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">cPanel & WHM Administrator Certification (CWA)</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/dc80-bac7-81fa-28e9"  target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2020</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">cPanel & WHM System Administrator I (CWSA-1)</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/091d-3432-a27e-47c6"  target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2020</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">cPanel & WHM System Administrator II (CWSA-2)</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/ce77-1003-fc3c-f92c"  target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2020</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">LiteSpeed Certification</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/c552-b77a-6697-ddcd"  target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2021</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Imunify360 Certification</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/c026-abac-3df2-2f95"  target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2022</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">JetBackup 4 Certification</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/042d-7426-83dd-2ccf"  target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2023</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">JetBackup 5 Certification</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/0e8c-2ac3-ae9b-a1ea"  target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2023</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">cPanel Certified Partner Accreditation (CPCP)</span>
-                    <small class="text-gray-500 font-medium italic">
-                      @
-                      <a href="https://university.cpanel.net/certificate/1ddf-2e94-4bdf-3673" target="_blank" class="underline">Validation Link</a>
-                    </small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2023</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>Now</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
             </div>
           </div>
+        </div>
 
-          <div class="section">
-            <h2 class="text-2xl font-light mb-4 flex">
-              <span class="mr-2 mt-1 text-gray-400">
-                <i class="fa-solid fa-graduation-cap fa-beat fa-xs"></i>
-              </span>
-              <span class="border-b-4 border-green-400 pb-1">Educations</span>
-            </h2>
-            <div class="pl-8">
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Informatics Engineering</span>
-                    <small class="text-gray-500 font-medium italic">@ University of Amikom Yogyakarta</small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2016</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>2019</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-              <div class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
-                <div class="tracking-tight flex items-baseline justify-between">
-                  <div>
-                    <span class="font-extrabold mr-1">Computer and Network Engineering</span>
-                    <small class="text-gray-500 font-medium italic">@ SMK Negeri 1 Boyolali</small>
-                  </div>
-                  <span class="text-xs text-gray-400 font-mono md:w-auto w-12 text-center ml-2">
-                    <span class="block md:inline">2013</span>
-                    <span class="px-1 hidden md:inline">-</span>
-                    <span>2016</span>
-                  </span>
-                </div>
-              </div>
-              <!-- Tambahkan pendidikan lain di sini sesuai kebutuhan -->
-            </div>
+        <div class="section">
+          <h2 class="text-2xl font-light mb-4 flex">
+            <span class="mr-2 mt-1 text-gray-400">
+              <i class="fa-solid fa-headset fa-beat fa-xs"></i>
+            </span>
+            <span class="border-b-4 border-green-400 pb-1">Interests</span>
+          </h2>
+          <div class="pl-8 text-sm text-gray-400 dark:text-gray-900">
+            <span v-for="(interest, index) in interests" :key="index" :class="getInterestClasses(index)">{{ interest }}</span>
           </div>
+        </div>
 
-          <div class="section">
-            <h2 class="text-2xl font-light mb-4 flex">
-              <span class="mr-2 mt-1 text-gray-400">
-                <i class="fa-solid fa-headset fa-beat fa-xs"></i>
-              </span>
-              <span class="border-b-4 border-green-400 pb-1">Interests</span>
-            </h2>
-            <div class="pl-8 text-sm text-gray-400 dark:text-gray-900">
-              <span>Music, Podcast, Kdrama, Anime, Video Games, Blogging, Reading</span>
-            </div>
-          </div>
-        </main>
-    </div>
-    <script>
-        const themeToggle = document.getElementById("theme-toggle");
-        const htmlElement = document.documentElement;
-    
-        themeToggle.addEventListener("click", () => {
-          if (htmlElement.classList.contains("dark")) {
-            htmlElement.classList.remove("dark");
-            htmlElement.style.colorScheme = "light";
-            themeToggle.innerHTML = '<i class="far fa-sun"></i>';
-          } else {
-            htmlElement.classList.add("dark");
-            htmlElement.style.colorScheme = "dark";
-            themeToggle.innerHTML = '<i class="far fa-moon"></i>';
-          }
-        });
-    </script>
+      </div>
+    </main>
+  </div>
+
+  <script src="./assets/data.js"></script>
+  <script src="./assets/darkmode.js"></script>
+
 </body>
 </html>
