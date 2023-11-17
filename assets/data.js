@@ -96,76 +96,87 @@ new Vue({
       ],
       certifications: [
         {
-          title: 'cPanel Professional Certification (CPP) From cPanel',
+          title: 'cPanel Professional Certification (CPP)',
           validationLink: 'https://university.cpanel.net/certificate/290f-0d9e-c6ab-4dad',
           startDate: '2020',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'cPanel & WHM Sales Professional (CPSP) From cPanel',
+          title: 'cPanel & WHM Sales Professional (CPSP)',
           validationLink: 'https://university.cpanel.net/certificate/c886-aa62-89f1-53e1',
           startDate: '2021',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'cPanel & WHM Administrator Certification (CWA) From cPanel',
+          title: 'cPanel & WHM Administrator Certification (CWA)',
           validationLink: 'https://university.cpanel.net/certificate/dc80-bac7-81fa-28e9',
           startDate: '2020',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'cPanel & WHM System Administrator I (CWSA-1) From cPanel',
+          title: 'cPanel & WHM System Administrator I (CWSA-1)',
           validationLink: 'https://university.cpanel.net/certificate/091d-3432-a27e-47c6',
           startDate: '2020',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'cPanel & WHM Sales Professional (CPSP) From cPanel',
+          title: 'cPanel & WHM Sales Professional (CPSP)',
           validationLink: 'https://university.cpanel.net/certificate/c886-aa62-89f1-53e1',
           startDate: '2021',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'cPanel & WHM Sales Professional (CPSP) From cPanel',
+          title: 'cPanel & WHM Sales Professional (CPSP)',
           validationLink: 'https://university.cpanel.net/certificate/c886-aa62-89f1-53e1',
           startDate: '2021',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'cPanel & WHM System Administrator II (CWSA-2) From cPanel',
+          title: 'cPanel & WHM System Administrator II (CWSA-2)',
           validationLink: 'https://university.cpanel.net/certificate/ce77-1003-fc3c-f92c',
           startDate: '2020',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'LiteSpeed Certification From cPanel',
+          title: 'LiteSpeed Certification',
           validationLink: 'https://university.cpanel.net/certificate/c552-b77a-6697-ddcd',
           startDate: '2021',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'Imunify360 Certification From cPanel',
+          title: 'Imunify360 Certification',
           validationLink: 'https://university.cpanel.net/certificate/c026-abac-3df2-2f95',
           startDate: '2023',
           endDate: 'Now'
         },
         {
-          title: 'JetBackup 4 Certification From cPanel',
+          title: 'JetBackup 4 Certification',
           validationLink: 'https://university.cpanel.net/certificate/042d-7426-83dd-2ccf',
           startDate: '2023',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'JetBackup 5 Certification From cPanel',
+          title: 'JetBackup 5 Certification',
           validationLink: 'https://university.cpanel.net/certificate/0e8c-2ac3-ae9b-a1ea',
           startDate: '2023',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         {
-          title: 'cPanel Certified Partner Accreditation (CPCP) From cPanel',
+          title: 'cPanel Certified Partner Accreditation (CPCP)',
           validationLink: 'https://university.cpanel.net/certificate/1ddf-2e94-4bdf-3673',
           startDate: '2023',
-          endDate: 'Now'
+          endDate: 'Now',
+          description: 'From cPanel University'
         },
         // Add other certifications as needed...
       ],
