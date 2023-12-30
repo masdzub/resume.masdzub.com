@@ -2,7 +2,7 @@
     list-style-type: disc; /* Set bullet points as filled circles */
     /* Add any additional styling here */
   }
-  
+
 .custom-list li {
   margin-left: 20px; /* Adjust the value as needed for indentation */
   /* Add any additional styling for the li here */
@@ -59,3 +59,17 @@
         transform: rotate(360deg);
     }
 }
+
+@media print {
+  
+    /* Hide specific elements from printing */
+    .text-center > * {
+      display: none;
+    }
+  
+    /* Show content you want to include in the print version */
+    .container,
+    .section {
+      display: block;
+    }
+  }

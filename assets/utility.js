@@ -17,3 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var minifiedHTML = html.replace(/[\n\r]+|[\s]{2,}/g, ' ').replace(/> </g, '><');
     document.documentElement.outerHTML = minifiedHTML;
   });
+
+  // Function to handle printing
+function printResume() {
+  window.print();
+}
+
+ // Add an event listener to the print button
+document.getElementById('printButton').addEventListener('click', printResume);
