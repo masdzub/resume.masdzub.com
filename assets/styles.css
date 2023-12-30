@@ -1,4 +1,12 @@
-
+.custom-list {
+    list-style-type: disc; /* Set bullet points as filled circles */
+    /* Add any additional styling here */
+  }
+  
+.custom-list li {
+  margin-left: 20px; /* Adjust the value as needed for indentation */
+  /* Add any additional styling for the li here */
+}
 
 .toggle-button {
     position: fixed;

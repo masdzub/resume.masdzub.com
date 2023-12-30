@@ -107,9 +107,10 @@
             </span>
             <span class="border-b-4 border-green-400 pb-1">Experiences</span>
           </h2>
+          
           <div class="pl-8">
             <!-- Experiences will be rendered here -->
-            <div v-for="(experience, index) in experiences" :key="index" class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-200">
+            <div v-for="(experience, index) in experiences" :key="index" class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-600">
               <div class="tracking-tight flex items-baseline justify-between">
                 <div>
                   <span class="font-extrabold mr-1">{{ experience.title }}</span>
@@ -123,10 +124,24 @@
                   <span>{{ experience.endDate === 'Present' ? 'Present' : experience.endDate }}</span>
                 </span>
               </div>
-              <p class="text-sm mt-1 text-gray-400 dark:text-gray-600 w-3/4">{{ experience.description }}</p>
+
+              <!-- New fields for Employment Status and Work Status -->
+              <div class="text-xs mt-2 text-gray-500 dark:text-gray-400">
+                <span><strong>Employment Status:</strong> {{ experience.employmentStatus }}</span><br>
+                <span><strong>Work Status:</strong> {{ experience.workStatus }}</span>
+              </div>
+
+              <div class="text-sm mt-1 text-gray-400 dark:text-gray-600 w-3/4">
+                <span><strong>As {{ experience.title }}, my responsibilities include</strong></span><br>
+                <!-- Render description as an unordered list -->
+                <ul class="custom-list">
+                  <li v-for="(item, i) in experience.descriptionItems" :key="i">{{ item }}</li>
+                </ul>
+              </div>
+
             </div>
-          </div>
-        </div>
+          </div>                    
+          
 
         <div class="section">
           <h2 class="text-2xl font-light mb-4 flex">
@@ -137,7 +152,7 @@
           </h2>
           <div class="pl-8">
             <!-- Certification items -->
-            <div v-for="(certification, index) in certifications" :key="index" class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
+            <div v-for="(certification, index) in certifications" :key="index" class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-600">
               <div class="tracking-tight flex items-baseline justify-between">
                 <div>
                   <span class="font-extrabold mr-1">{{ certification.title }}</span>
@@ -166,7 +181,7 @@
           </h2>
           <div class="pl-8">
             <!-- Education items -->
-            <div v-for="(education, index) in educations" :key="index" class="mb-4 pl-4 border-l-4 border-gray-200 dark:border-gray-600">
+            <div v-for="(education, index) in educations" :key="index" class="mb-4 pl-4 border-l-4 border-green-100 dark:border-green-600">
               <div class="tracking-tight flex items-baseline justify-between">
                 <div>
                   <span class="font-extrabold mr-1">{{ education.field }}</span>
@@ -193,8 +208,15 @@
             <span v-for="(interest, index) in interests" :key="index" :class="getInterestClasses(index)">{{ interest }}</span>
           </div>
         </div>
-
       </div>
+      
+      <div class="text-center mt-8">
+        <a href="./assets/CV_Ahmad Dzubayyan.pdf" download="Dzubayyan_Ahmad_Resume.pdf" class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">
+          <i class="fas fa-download mr-2"></i> 
+          Download CV
+        </a>
+      </div>
+  
     </main>
   </div>
 
