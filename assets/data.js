@@ -2,12 +2,12 @@ new Vue({
     el: '#app',
     data: {
       fullName: 'Dzubayyan Ahmad',
-      jobTitle: 'Senior Technical Support Specialist',
+      jobTitle: 'System Administrator',
       email: 'hello@masdzub.com',
       phoneNumber: '+62 881 08 000 81 80',
       website: 'https://masdzub.com',
       gravatarURL: 'https://www.gravatar.com/avatar/509d3b6019d078eb39f42d51e7024abc?s=300',
-      description: 'Technical Support Specialist, Half Sysadmin based in Yogyakarta, Indonesia',
+      description: 'System Administrator based in Bali, Indonesia',
       
       skillsData: {
         basic: [
@@ -33,11 +33,27 @@ new Vue({
       },
       experiences: [
         {
+          title: 'System Administrator',
+          company: '@World Host Group',
+          companyLink: 'https://worldhost.group/',
+          startDate: '2022/10',
+          endDate: 'present',
+          descriptionItems: [
+            'Monitored system and procedural processes encompassing Abuse, SSL, migration, cPanel license, and other issues.',
+            'Maintain a high level of customer service and support for all technical issues, including troubleshooting and problem resolution.',
+            'Migrate account hosting to balancing resource and migration from outside into our server and new server.',
+            'Diagnose and troubleshoot errors and technical glitches in client applications or systems. Effectively fixing issues to ensure client satisfaction and minimal downtime.',
+            'Implemented rigorous security measures, including screening for domain and hosting abuse such as fraud, phishing, spamming, and other illicit activities, ensuring a secure hosting environment for clients.',
+          ],
+          employmentStatus: "Contract",
+          workStatus: "On-Site" 
+        },
+        {
           title: 'Sr. Technical Support Specialist',
           company: '@DomaiNesia',
           companyLink: 'https://domainesia.com',
           startDate: '2022/10',
-          endDate: 'Present',
+          endDate: '2024/01',
           descriptionItems: [
             'Developed and implemented technical support processes and procedures to enhance efficiency and effectiveness.',
             'Monitored system and procedural processes encompassing Abuse, SSL, migration, cPanel license, and other issues.',
