@@ -34,9 +34,9 @@ new Vue({
       experiences: [
         {
           title: 'System Administrator',
-          company: '@World Host Group',
-          companyLink: 'https://worldhost.group/',
-          startDate: '2022/10',
+          company: '@hosting.com',
+          companyLink: 'https://hosting.com/',
+          startDate: '2024/01',
           endDate: 'present',
           descriptionItems: [
             'Monitored system and procedural processes encompassing Abuse, SSL, migration, cPanel license, and other issues.',
@@ -45,7 +45,7 @@ new Vue({
             'Diagnose and troubleshoot errors and technical glitches in client applications or systems. Effectively fixing issues to ensure client satisfaction and minimal downtime.',
             'Implemented rigorous security measures, including screening for domain and hosting abuse such as fraud, phishing, spamming, and other illicit activities, ensuring a secure hosting environment for clients.',
           ],
-          employmentStatus: "Contract",
+          employmentStatus: "Permanent",
           workStatus: "On-Site" 
         },
         {
